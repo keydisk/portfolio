@@ -14,7 +14,30 @@ UIKit, SwiftUI, MapKit, WebKit, SnapKit, Combine, Alamofire, SwiftyJson
 * 앱내부에서 사용하는 아이콘 이미지는 시스템 이미지 사용
 * 폰트는 spoqa 폰트 사용
 * keyboard toolbar
+* NFC 읽기 및 쓰기 구현
 
 ## 향후 개선사항
 * 스킴으로 모든 기능을 다 연결해서 외부에서 앱의 원하는 기능으로 연결 되게 구현
 * oauth 사용
+
+글로벌 얼럿 호출 코드
+<pre>
+  <code>
+    GlobalAlertViewModel.shared.showAlert(message: message, confirmBtn: AlertBtnModel(title: "확인", action: {
+            completionHandler()
+        }))
+
+    GlobalAlertViewModel.shared.showAlert(message: message, confirmBtn: AlertBtnModel(title: "확인", action: {
+            completionHandler(true)
+        }), cancelBtn: AlertBtnModel(title: "취소", action: {
+            completionHandler(false)
+        }))
+  </code>
+</pre>
+
+토스트 메시지 호출
+<pre>
+  <code>
+    ToastMessage.shared.setMessage("메시지")
+  </code>
+</pre>
