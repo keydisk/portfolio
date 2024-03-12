@@ -714,14 +714,9 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
     //MARK: - navigation
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         
-        #if DEBUG
-//        debugPrint("didFailProvisionalNavigation error : \(error)")
-        #endif
-        
         let localError = error as NSError
         var isExceptionScheme  = false // 예외 스키마 허용 여부
         
-        // 예외 스키마 참조 URL : https://developer.apple.com/library/content/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007899-CH1-SW1
         let erExceptionSchemes = ["tel:", "mailto:", "callto:", "facetime:", "sms:" ]
         
         for scheme in erExceptionSchemes {
@@ -869,10 +864,8 @@ extension CustomWKWebView: WKDownloadDelegate {
         }
     }
     
-    @available(iOS 14.5, *)
     func downloadDidFinish(_ download: WKDownload) {
         
-//        CustomToastMessage.shared.showMessage("File Download Success")
     }
     
     @available(iOS 14.5, *)

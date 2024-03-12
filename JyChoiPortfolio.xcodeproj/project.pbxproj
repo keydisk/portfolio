@@ -15,6 +15,7 @@
 		C020D3DF2B9ECD3A002D3E6B /* NFCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020D3DE2B9ECD3A002D3E6B /* NFCViewModel.swift */; };
 		C020D3E12B9ED1E0002D3E6B /* NFCReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020D3E02B9ED1E0002D3E6B /* NFCReaderView.swift */; };
 		C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */; };
+		C047F79E2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */; };
 		C0BAA0922B9E7A9D00B9E530 /* CommonConstValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */; };
 		C0BAA0952B9EA69E00B9E530 /* StoreImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BAA0942B9EA69E00B9E530 /* StoreImgView.swift */; };
 		C0CED0E02B9A9A5F0087A793 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CED0DF2B9A9A5F0087A793 /* ToastMessageView.swift */; };
@@ -81,6 +82,7 @@
 		C020D3DE2B9ECD3A002D3E6B /* NFCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCViewModel.swift; sourceTree = "<group>"; };
 		C020D3E02B9ED1E0002D3E6B /* NFCReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCReaderView.swift; sourceTree = "<group>"; };
 		C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
+		C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlertViewModel.swift; sourceTree = "<group>"; };
 		C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConstValue.swift; sourceTree = "<group>"; };
 		C0BAA0942B9EA69E00B9E530 /* StoreImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImgView.swift; sourceTree = "<group>"; };
 		C0CED0DF2B9A9A5F0087A793 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				C0DAE8772B986AE1007D194F /* MainViewModel.swift */,
 				C0DAE8AA2B99BB7C007D194F /* DetailViewModel.swift */,
 				C020D3DE2B9ECD3A002D3E6B /* NFCViewModel.swift */,
+				C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				C0DAE8732B986894007D194F /* SearchAPIs.swift in Sources */,
 				C020D3DF2B9ECD3A002D3E6B /* NFCViewModel.swift in Sources */,
 				C0DAE8922B993DD4007D194F /* IntExtension.swift in Sources */,
+				C047F79E2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift in Sources */,
 				C0DAE8AF2B99C920007D194F /* StoreDetailModel.swift in Sources */,
 				C0CED0E02B9A9A5F0087A793 /* ToastMessageView.swift in Sources */,
 				C020D3DB2B9EBFE6002D3E6B /* CommonWebView.swift in Sources */,
