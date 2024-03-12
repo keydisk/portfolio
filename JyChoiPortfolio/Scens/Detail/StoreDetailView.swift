@@ -16,6 +16,17 @@ struct StoreInfoModel: Identifiable {
     let id: IconType
 }
 
+struct StoreDetailViewTitleModifier: ViewModifier {
+    
+    let addTopHeight: Bool
+    
+    func body(content: Content) -> some View {
+        
+        content.padding(.horizontal, 10).padding(.top, addTopHeight ? 15 : 5)
+    }
+}
+
+
 struct StoreDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -70,7 +81,7 @@ struct StoreDetailView: View {
                 
                 Text(title).font(.title3).foregroundColor(.black)
                 Spacer()
-            }.padding(.horizontal, 10).padding(.top, 15)
+            }.modifier(StoreDetailViewTitleModifier(addTopHeight: true))
         }
     }
     
@@ -152,7 +163,7 @@ struct StoreDetailView: View {
                             
                             Text("지점 정보").font(.title3).foregroundColor(.black).padding(.trailing, 10).padding(.top, 10)
                             Spacer()
-                        }.padding(.horizontal, 10).padding(.top, 5)
+                        }.modifier(StoreDetailViewTitleModifier(addTopHeight: false) )
                         
                         Spacer()
                         
