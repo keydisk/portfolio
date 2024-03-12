@@ -14,6 +14,7 @@
 		C020D3DD2B9EC512002D3E6B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020D3DC2B9EC512002D3E6B /* DateExtension.swift */; };
 		C020D3DF2B9ECD3A002D3E6B /* NFCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020D3DE2B9ECD3A002D3E6B /* NFCViewModel.swift */; };
 		C020D3E12B9ED1E0002D3E6B /* NFCReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020D3E02B9ED1E0002D3E6B /* NFCReaderView.swift */; };
+		C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */; };
 		C0BAA0922B9E7A9D00B9E530 /* CommonConstValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */; };
 		C0BAA0952B9EA69E00B9E530 /* StoreImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BAA0942B9EA69E00B9E530 /* StoreImgView.swift */; };
 		C0CED0E02B9A9A5F0087A793 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CED0DF2B9A9A5F0087A793 /* ToastMessageView.swift */; };
@@ -79,6 +80,7 @@
 		C020D3DC2B9EC512002D3E6B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		C020D3DE2B9ECD3A002D3E6B /* NFCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCViewModel.swift; sourceTree = "<group>"; };
 		C020D3E02B9ED1E0002D3E6B /* NFCReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCReaderView.swift; sourceTree = "<group>"; };
+		C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConstValue.swift; sourceTree = "<group>"; };
 		C0BAA0942B9EA69E00B9E530 /* StoreImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImgView.swift; sourceTree = "<group>"; };
 		C0CED0DF2B9A9A5F0087A793 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		C0DAE8882B993002007D194F /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */,
 				C0DAE8892B993019007D194F /* RoundTextField.swift */,
 				C0DAE88B2B9934B9007D194F /* RectangleModifier.swift */,
 				C0DAE89E2B998C15007D194F /* CustomMapView.swift */,
@@ -546,6 +549,7 @@
 			files = (
 				C0DAE83E2B9863E6007D194F /* ContentView.swift in Sources */,
 				C0DAE8852B987256007D194F /* StorePointModel.swift in Sources */,
+				C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */,
 				C0DAE8942B993F64007D194F /* FontExtension.swift in Sources */,
 				C0DAE8AB2B99BB7C007D194F /* DetailViewModel.swift in Sources */,
 				C0DAE8B62B9A0390007D194F /* UIScrollViewWrapper.swift in Sources */,

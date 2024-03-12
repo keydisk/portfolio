@@ -12,12 +12,14 @@ struct CommonWebView: UIViewRepresentable {
     var url: String
     
     func makeUIView(context: Context) -> WKWebView {
+        
         guard let url = URL(string: url) else {
-            return WKWebView()
+            return CustomWKWebView()
         }
-        let webView = WKWebView()
+        
+        let webView = CustomWKWebView()
 
-        webView.load(URLRequest(url: url))
+        webView.requestUrl(requestUrl: url.absoluteString)
         
         return webView
     }
