@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// List나 ForEach에 사용할 모델
 struct RefeatModel<T>: Identifiable {
     
     let id: String

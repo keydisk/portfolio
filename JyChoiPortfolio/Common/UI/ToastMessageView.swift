@@ -31,6 +31,7 @@ class ToastMessage: ObservableObject {
     }
 }
 
+/// 토스트 메시지 표시를 위해 사용
 struct ToastMessageView: View {
     
     @ObservedObject var viewModel = ToastMessage.shared

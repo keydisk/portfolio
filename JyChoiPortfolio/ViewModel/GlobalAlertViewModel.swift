@@ -13,6 +13,7 @@ struct AlertBtnModel {
     let action: () -> Void
 }
 
+/// 얼럿을 아무때나 표시하기 위해 사용
 class GlobalAlertViewModel: ObservableObject {
     
     @Published var showAlert = false

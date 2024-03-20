@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-/// 공통으로 사용하는 웹뷰
+/// 웹뷰를 swiftUI에서 사용하기 위해 랩핑
 struct CommonWebView: UIViewRepresentable {
     var url: String
     

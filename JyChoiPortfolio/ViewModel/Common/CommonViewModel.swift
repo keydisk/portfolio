@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 import Combine
 
+/// 공통으로 사용할 로직을 모아 놓은 뷰 모델
 class CommonViewModel: ObservableObject {
     
-    @Published public var keyboardHeight: CGFloat = 0
+    @Published public var showKeyboard: Bool = false
     
     init() {
         
@@ -36,11 +37,8 @@ class CommonViewModel: ObservableObject {
     }
     
     @objc func keyboardWillShow(_ notification:Notification) { 
-        let userInfo = notification.userInfo!
-        let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
-        let keyboardRectangle = keyboardFrame.cgRectValue
         
-        self.keyboardHeight = keyboardRectangle.height
+        self.showKeyboard = true
     }
     
     @objc func keyboardDidShow(_ notification:Notification)  { }
@@ -49,6 +47,6 @@ class CommonViewModel: ObservableObject {
     
     @objc func keyboardDidHide(_ notification:Notification)  {
         
-        self.keyboardHeight = 0
+        self.showKeyboard = false
     }
 }

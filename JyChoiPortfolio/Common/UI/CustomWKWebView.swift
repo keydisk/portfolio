@@ -585,9 +585,13 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
 //    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
         
-        if navigationAction.shouldPerformDownload {
-            debugPrint("###")
-            decisionHandler(.download, preferences)
+        if #available(iOS 14.5, *) {
+            
+            if navigationAction.shouldPerformDownload {
+                debugPrint("###")
+                decisionHandler(.download, preferences)
+                return
+            }
         } else {
             
             if self.isHttpRequestUrlFromWebView(callUrl: navigationAction.request.url) {
@@ -609,7 +613,11 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
                 
                 if urlText.hasPrefix("data:image/png;base64") == true {
                     
-                    decisionHandler(.download, preferences)
+                    if #available(iOS 14.5, *) {
+                        decisionHandler(.download, preferences)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 } else {
                     
                     decisionHandler(.cancel, preferences)
@@ -617,6 +625,7 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
                 
             }
         }
+        
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void) {
@@ -839,10 +848,12 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
 
 extension CustomWKWebView: WKDownloadDelegate {
     
+    @available(iOS 14.5, *)
     func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
         download.delegate = self
     }
     
+    @available(iOS 14.5, *)
     func download(_ download: WKDownload, decideDestinationUsing response: URLResponse, suggestedFilename: String, completionHandler: @escaping (URL?) -> Void) {
         
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -864,6 +875,7 @@ extension CustomWKWebView: WKDownloadDelegate {
         }
     }
     
+    @available(iOS 14.5, *)
     func downloadDidFinish(_ download: WKDownload) {
         
     }

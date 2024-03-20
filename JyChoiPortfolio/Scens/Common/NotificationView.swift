@@ -40,15 +40,18 @@ class NotificationViewViewModel: ObservableObject {
     }
 }
 
-/// 공지사항 뷰
+/// 공지사항을 표시할 웹뷰
 struct NotificationView: View {
     
     let url: String
+    let title: String
+    
     @State var hidenView = true
     @ObservedObject var viewModel = NotificationViewViewModel()
     
-    init(url: String, hidenView: Bool = false) {
+    init(title: String, url: String, hidenView: Bool = false) {
         
+        self.title = title
         self.url = url
     }
     
@@ -63,6 +66,12 @@ struct NotificationView: View {
         
         GeometryReader { geo in
             VStack(spacing: 0) {
+                HStack {
+                    Spacer()
+                    Text(self.title)
+                    Spacer()
+                }.background(Color.white)
+                
                 CommonWebView(url: self.url)
                 
                 HStack(spacing: 0) {
@@ -98,5 +107,5 @@ struct NotificationView: View {
 }
 
 #Preview {
-    NotificationView(url: "https://www.naver.com")
+    NotificationView(title: "Test", url: "https://www.naver.com")
 }

@@ -28,6 +28,7 @@ class ScrollViewCoordinator: NSObject, UIScrollViewDelegate {
     
 }
 
+/// 스크롤뷰 페이징을 위해 랩핑함
 struct PagingScrollView<Content: View>: UIViewRepresentable {
     
     var content: Content
