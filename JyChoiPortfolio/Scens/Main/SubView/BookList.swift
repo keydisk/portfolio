@@ -43,12 +43,12 @@ struct BookInfoCell: View {
             
             VStack(spacing: 0) {
                 
-                self.printText(text: model.title, align: .leading, font: .spoqaMedium(fontSize: 18), textColor: .black)
-                self.printText(text: model.author, align: .leading, font: .spoqaMedium(fontSize: 15), textColor: .black)
-                self.printText(text: model.status, align: .leading, font: .spoqaMedium(fontSize: 15), textColor: .black)
+                self.printText(text: model.title, align: .leading, font: .defaultFont, textColor: .black)
+                self.printText(text: model.printAuthor, align: .leading, font: .defaultFont, textColor: .black)
+                self.printText(text: model.status, align: .leading, font: .defaultFont, textColor: .black)
                 Spacer()
-                self.printText(text: model.printPrice, align: .trailing, font: .spoqaMedium(fontSize: 15), textColor: .black)
-                self.printText(text: model.printDate, align: .trailing, font: .spoqaMedium(fontSize: 15), textColor: .orange)
+                self.printText(text: model.printPrice, align: .trailing, font: .defaultFont, textColor: .black)
+                self.printText(text: model.printDate, align: .trailing, font: .defaultFont, textColor: .orange)
             }.padding(.leading, 10)
             Spacer()
             
@@ -61,16 +61,13 @@ struct BookList: View {
     
     /// 리스트 모델이 변경되면 반영해주기 위해서 사용
     @Binding var listModels: [BookModel]
-    ///
-    @Binding var refreshList: Bool
     let viewModel: MainViewModel
     private var offsetY: CGFloat = 0
     
-    init(listModels: Binding<[BookModel]>, refreshList: Binding<Bool>, viewModel: MainViewModel) {
+    init(listModels: Binding<[BookModel]>, viewModel: MainViewModel) {
         
         self.viewModel   = viewModel
         self._listModels  = listModels
-        self._refreshList = refreshList
     }
     
     var index: Int = 0
@@ -92,7 +89,6 @@ struct BookList: View {
                     return
                 }
                 
-                print("pageTop")
                 withAnimation(.default, {
                     proxy.scrollTo("id1", anchor: .top)
                 })
@@ -108,10 +104,6 @@ struct BookList: View {
                     UIApplication.shared.endEditing()
                 })
             )
-// iOS 15이상만 지원
-//                .refreshable {
-//                    self.refre
-//                }
         }
         
     }

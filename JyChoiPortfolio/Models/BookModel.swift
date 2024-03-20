@@ -14,18 +14,42 @@ struct BookModel: Codable, Identifiable {
     var id: String = ""
     var index: Int = 0
     
-    var author: String {
+    var printAuthor: String {
         if let first = self.authors.first {
             if self.authors.count == 1 {
                 
-                return "저자 : \(first)"
+                return "\(first)"
             } else {
                 
-                return "저자 : \(first.appending("외 \(self.authors.count - 1)"))"
+                return "\(first.appending("외 \(self.authors.count - 1)"))"
             }
         }
         
-        return "저자 : - "
+        return " - "
+    }
+    
+    /// 여러명의 저자 동시에 출력
+    var printAuthors: String {
+        if let first = self.authors.first {
+            if self.authors.count == 1 {
+                
+                return first
+            } else {
+                
+                return self.authors.reduce("", {state, current in
+                    
+                    if state == "" {
+                        
+                        return current
+                    } else {
+                        
+                        return state.appending(", \(current)")
+                    }
+                })
+            }
+        }
+        
+        return " - "
     }
     
     let authors: [String]
@@ -35,6 +59,13 @@ struct BookModel: Codable, Identifiable {
         let date = Date(fromString: self.datetime, format: "yyyy-mm-dd'T'HH:mm:ss.SSSZZZZ")
         
         return "출간일 : \(date?.toString(format: "yyyy-MM-dd") ?? "")"
+    }
+    
+    var printDateWithoutTitle: String {
+        
+        let date = Date(fromString: self.datetime, format: "yyyy-mm-dd'T'HH:mm:ss.SSSZZZZ")
+        
+        return date?.toString(format: "yyyy-MM-dd") ?? ""
     }
     
     let price: Int

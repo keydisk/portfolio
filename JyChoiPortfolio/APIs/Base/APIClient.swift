@@ -15,9 +15,9 @@ import Alamofire
 class APIClient {
     
     static let shared = APIClient()
-    let defaultHeader: HTTPHeaders = [:]
+    let defaultHeader: HTTPHeaders = ["Content-type":"application/json; charset= utf-8"]
     
-    /// 통신 모듈 (Combine으로 구현) 
+    /// 통신 모듈 (Combine으로 구현)
     ///
     /// - Parameters:
     ///   - url: url path 부분
@@ -25,7 +25,7 @@ class APIClient {
     ///   - param: key value 타입의 데이터
     ///   - method: 데이터 전송 타입 ex) get, post, put ....
     /// - Returns: PassThrought타입의 데이터
-    func requestData(url: String, data: String? = nil, param: Parameters = [:], header: [HTTPHeader] = [], method: HTTPMethod) -> AnyPublisher<Data, NSError> {
+    func requestData(url: String, data: String? = nil, param: Parameters = [:], header: [HTTPHeader] = [], method: HTTPMethod) -> PassthroughSubject<Data, NSError> {
         
         let combine = PassthroughSubject<Data, NSError>()
         
@@ -61,9 +61,8 @@ class APIClient {
             
             #if DEBUG
             if CommonConstValue.showNetworkLog {
-                print("callUrl : \(callUrl) param: \(param)")
+                print("url : \(url) param : \(param) ")
             }
-            
             #endif
             
             dataRequest.validate(statusCode: 200..<300)
@@ -101,6 +100,6 @@ class APIClient {
             combine.send(completion: .failure(error as NSError) )
         }
         
-        return combine.eraseToAnyPublisher()
+        return combine
     }
 }

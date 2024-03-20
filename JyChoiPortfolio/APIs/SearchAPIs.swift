@@ -8,14 +8,17 @@
 import Foundation
 import Combine
 import Alamofire
+import SwiftyJSON
 
 /// 검색 API
 class SearchAPIs {
     
     let api = APIClient()
     
+    static let searchType = "type"
+    
     /// 주소로 검색
-    /// 
+    ///
     /// - Parameters:
     ///   - text: 주소
     ///   - pageNo: 페이지 번호
@@ -29,17 +32,24 @@ class SearchAPIs {
         
         let header = [HTTPHeader(name: "Authorization", value: "KakaoAK 15208ecfaeedf448c41c9312cd133cd5")]
         
-        parameter["query"]  = text.urlEncodeWithQuery
+        parameter["query"]  = text
         parameter["page"]   = pageNo
         parameter["sort"]   = sortingOption.rawValue
         parameter["size"]   = size
         parameter["target"] = target.rawValue
         
-        #if DEBUG
-        if CommonConstValue.showNetworkLog {
-            print("\(#function) parameter : \(parameter)")
-        }
-        #endif
-        return self.api.requestData(url: "https://dapi.kakao.com/v3/search/book", param: parameter, header: header, method: .get)
+        return self.api.requestData(url: "https://dapi.kakao.com/v3/search/book", param: parameter, header: header, method: .get).map({data -> Data in
+                
+            do {
+                var json = JSON(data)
+                json[SearchAPIs.searchType].string = target.rawValue
+                
+                return try json.rawData()
+            } catch let error {
+                
+            }
+            
+            return data
+        }).eraseToAnyPublisher()
     }
 }

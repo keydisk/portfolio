@@ -56,8 +56,8 @@ class MainViewModel: CommonViewModel {
                 self.list = []
             } else if self.searchText != newValue {
                 
-                self.pageModel.currentPageNo = 1
-                self.requestBookList(newValue)
+                self.searchBookListFromKeyword.send(newValue)
+                print("newValue : \(newValue)")
             }
         }
     }
@@ -84,6 +84,7 @@ class MainViewModel: CommonViewModel {
     @Published var selectBookModel = CurrentValueSubject<BookModel?, Never>(nil)
     @Published var moveDetailView: Bool = false
     
+    let searchBookListFromKeyword = PassthroughSubject<String, Never>()
     var cancelationList  = Set<AnyCancellable>()
     
     override init() {
@@ -104,7 +105,11 @@ class MainViewModel: CommonViewModel {
             self?.objectWillChange.send()
         }).store(in: &cancelationList)
         
-        self.useKeyboardNoti()
+        self.searchBookListFromKeyword.debounce(for: 0.5, scheduler: DispatchQueue.global(qos: .background)).sink(receiveValue: {[weak self] text in
+            
+            self?.pageModel.currentPageNo = 1
+            self?.requestBookList(text)
+        }).store(in: &self.cancelationList)
     }
     
     /// 정렬 타입 선택
@@ -128,13 +133,13 @@ class MainViewModel: CommonViewModel {
             return
         }
         
-        print(type)
         self.target = type
         
         guard self.searchText != "" else {
             return
         }
         
+        self.pageModel.currentPageNo = 1
         self.requestBookList(self.searchText)
     }
     
@@ -143,13 +148,8 @@ class MainViewModel: CommonViewModel {
     /// 책 리스트 요청
     private func requestBookList(_ text: String) {
         
-        guard let query = text.urlEncodeWithQuery else {
-            return
-        }
-        
         self.anyCancelation?.cancel()
-        
-        self.anyCancelation = self.api.requestBookList(text: query, target: self.target, sortingOption: self.sortingOption, pageNo: self.pageModel.currentPageNo, size: PageDataModel.pageSize).receive(on: DispatchQueue.main).receive(on: DispatchQueue.main).sink(receiveCompletion: {complete in
+        self.anyCancelation = self.api.requestBookList(text: text, target: self.target, sortingOption: self.sortingOption, pageNo: self.pageModel.currentPageNo, size: PageDataModel.pageSize).receive(on: DispatchQueue.main).receive(on: DispatchQueue.main).sink(receiveCompletion: {complete in
             
             switch complete {
             case .finished:
@@ -189,7 +189,6 @@ class MainViewModel: CommonViewModel {
                     })
                 }
                 
-                print("json[\"meta\"] : \(json["meta"])")
                 self?.pageModel = PageDataModel(isEnd: json["meta"]["is_end"].boolValue, pagableCnt: json["meta"]["pageable_count"].intValue, totalCnt: json["meta"]["total_count"].intValue, currentPageNo: self?.pageModel.currentPageNo ?? 1)
                 
                 self?.objectWillChange.send()
@@ -200,6 +199,8 @@ class MainViewModel: CommonViewModel {
             }
             
         })
+        
+        
     }
     
     func nextPage(_ model: BookModel) {
@@ -209,7 +210,7 @@ class MainViewModel: CommonViewModel {
             return
         }
         
-        self.pageModel.currentPageNo += 1
+        self.pageModel.currentPageNo = (self.list.count / PageDataModel.pageSize) + 1
         self.requestBookList(self.searchText)
     }
 }

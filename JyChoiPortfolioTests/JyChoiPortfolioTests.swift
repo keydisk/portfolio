@@ -20,8 +20,9 @@ final class JyChoiPortfolioTests: XCTestCase {
     }
 
     let mainViewModel = MainViewModel()
+    var cancelationList = Set<AnyCancellable>()
     
-    func test키워드로지점검색() throws {
+    func test키워드로서점검색() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         // Any test you write for XCTest can be annotated as throws and async.
@@ -29,9 +30,9 @@ final class JyChoiPortfolioTests: XCTestCase {
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         
         self.mainViewModel.searchText = "잠"
-        assert(self.mainViewModel.list.count == 2)
-        self.mainViewModel.searchText = ""
-        assert(self.mainViewModel.list.count == 5)
+        self.mainViewModel.list.publisher.sink(receiveValue: {list in
+            assert(list.title.contains(self.mainViewModel.searchText))
+        }).store(in: &cancelationList)
     }
     
     

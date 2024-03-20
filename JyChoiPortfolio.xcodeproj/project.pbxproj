@@ -19,6 +19,9 @@
 		C025DB772BA9BC1B00B57156 /* PageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB762BA9BC1B00B57156 /* PageDataModel.swift */; };
 		C025DB792BA9C14300B57156 /* HorizontalTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB782BA9C14300B57156 /* HorizontalTextModifier.swift */; };
 		C025DB7B2BA9E13B00B57156 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C025DB7A2BA9E13A00B57156 /* README.md */; };
+		C025DB9A2BAA78DD00B57156 /* BookMetaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB992BAA78DD00B57156 /* BookMetaInfoView.swift */; };
+		C025DB9C2BAA9F6800B57156 /* LoginInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB9B2BAA9F6800B57156 /* LoginInfoModel.swift */; };
+		C025DB9E2BAAA9FD00B57156 /* NFCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB9D2BAAA9FD00B57156 /* NFCViewModel.swift */; };
 		C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */; };
 		C047F79E2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */; };
 		C0BAA0922B9E7A9D00B9E530 /* CommonConstValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */; };
@@ -97,6 +100,9 @@
 		C025DB7A2BA9E13A00B57156 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C025DB812BA9E22100B57156 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C025DB832BA9E22100B57156 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C025DB992BAA78DD00B57156 /* BookMetaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMetaInfoView.swift; sourceTree = "<group>"; };
+		C025DB9B2BAA9F6800B57156 /* LoginInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoModel.swift; sourceTree = "<group>"; };
+		C025DB9D2BAAA9FD00B57156 /* NFCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFCViewModel.swift; sourceTree = "<group>"; };
 		C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlertViewModel.swift; sourceTree = "<group>"; };
 		C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConstValue.swift; sourceTree = "<group>"; };
@@ -183,6 +189,14 @@
 				C025DB722BA945E900B57156 /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		C025DB982BAA78A200B57156 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				C025DB992BAA78DD00B57156 /* BookMetaInfoView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		C0DAE82F2B9863E6007D194F = {
@@ -290,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				C01B54BE2BA01BFE00CBEE13 /* Common */,
+				C025DB9D2BAAA9FD00B57156 /* NFCViewModel.swift */,
 				C0DAE8772B986AE1007D194F /* MainViewModel.swift */,
 				C0DAE8AA2B99BB7C007D194F /* DetailViewModel.swift */,
 				C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */,
@@ -360,6 +375,7 @@
 				C020D3D52B9EB964002D3E6B /* Common */,
 				C025DB6B2BA90ACE00B57156 /* BookModel.swift */,
 				C025DB762BA9BC1B00B57156 /* PageDataModel.swift */,
+				C025DB9B2BAA9F6800B57156 /* LoginInfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -391,6 +407,7 @@
 		C0DAE8A42B99B898007D194F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				C025DB982BAA78A200B57156 /* SubViews */,
 				C0DAE8A52B99B8AB007D194F /* BookInfoDetailView.swift */,
 			);
 			path = Detail;
@@ -552,6 +569,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C025DB9E2BAAA9FD00B57156 /* NFCViewModel.swift in Sources */,
 				C0DAE83E2B9863E6007D194F /* ContentView.swift in Sources */,
 				C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */,
 				C0DAE8942B993F64007D194F /* FontExtension.swift in Sources */,
@@ -560,6 +578,7 @@
 				C0DAE87E2B986CE2007D194F /* CollectionExtension.swift in Sources */,
 				C025DB752BA97D2600B57156 /* UIApplicationExtension.swift in Sources */,
 				C0DAE88A2B993019007D194F /* RoundTextField.swift in Sources */,
+				C025DB9A2BAA78DD00B57156 /* BookMetaInfoView.swift in Sources */,
 				C0DAE83C2B9863E6007D194F /* JyChoiPortfolioApp.swift in Sources */,
 				C0DAE89F2B998C15007D194F /* CustomMapView.swift in Sources */,
 				C020D3DD2B9EC512002D3E6B /* DateExtension.swift in Sources */,
@@ -574,6 +593,7 @@
 				C047F79E2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift in Sources */,
 				C0CED0E02B9A9A5F0087A793 /* ToastMessageView.swift in Sources */,
 				C025DB792BA9C14300B57156 /* HorizontalTextModifier.swift in Sources */,
+				C025DB9C2BAA9F6800B57156 /* LoginInfoModel.swift in Sources */,
 				C020D3DB2B9EBFE6002D3E6B /* CommonWebView.swift in Sources */,
 				C0DAE8B82B9A126E007D194F /* ActivityView.swift in Sources */,
 				C0DAE8742B986894007D194F /* APIClient.swift in Sources */,

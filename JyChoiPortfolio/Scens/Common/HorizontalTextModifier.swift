@@ -35,7 +35,7 @@ struct HorizontalTextModifier: ViewModifier {
                 Spacer()
             }
             
-            content.foregroundColor(textColor).font(isTitle ? .spoqaBold(fontSize: 18) : .spoqaMedium(fontSize: 15))
+            content.foregroundColor(textColor).font(isTitle ? .spoqaBold(fontSize: 18) : .defaultFont)
             
             if align == .leading || align == .center {
                 Spacer()

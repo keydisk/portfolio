@@ -80,16 +80,14 @@ struct SelectSearchType: View {
                         .scaledToFit().padding(10)
                 }
             })
-            
-            Spacer()
-        }//.frame(maxWidth: .infinity, alignment: .leading)//.frame(height: 40)
+        }
     }
 }
 
 /// 메인 뷰
 struct ContentView: View {
     
-    @StateObject var viewModel = MainViewModel()
+    @ObservedObject var viewModel = MainViewModel()
     @State private var isFocus: Bool = false
     @State private var showAppleLogin: Bool = false
     
@@ -115,10 +113,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-//        GeometryReader {geo in
-//            
-//        }
-        
+
         ZStack {
             VStack(spacing: 0) {
                 
@@ -131,8 +126,10 @@ struct ContentView: View {
                 }.padding(.horizontal, 10)
                 
                 HStack(spacing: 0) {
+                    
                     Text("\(self.viewModel.pageModel.totalCnt)").foregroundColor(.blue)
                     Text("개의 검색 결과").font(.spoqaRegular(fontSize: 15))
+                    
                     Spacer()
                     self.drawSortingOption(.accuracy)
                     self.drawSortingOption(.latest).padding(.leading, 10)
@@ -144,7 +141,7 @@ struct ContentView: View {
                         
                         EmptyView()
                     } else {
-                        BookList(listModels: self.$viewModel.list, refreshList: self.$viewModel.refreshList, viewModel: self.viewModel).padding(.top, 10.0)
+                        BookList(listModels: self.$viewModel.list, viewModel: self.viewModel).padding(.top, 10.0)
                     }
                 }.accessibilityLabel(ContentViewConstValue.scrollLabel)
                 
@@ -152,14 +149,26 @@ struct ContentView: View {
                 
                 Spacer()
             }
-//                .sheet(isPresented: $showSearchType, content: {
-//
-//                    SelectSearchType(viewModel: self.viewModel)
-//                })
             .sheet(isPresented: $showAppleLogin, content: {
                 
                 LoginView()
             })
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    VStack {
+                        Image(systemName: "person.badge.key").onTapGesture {
+                            
+                            self.showAppleLogin.toggle()
+                        }
+                        Text("로그인")
+                    }
+                    
+                }
+            }.padding(.trailing, 20).padding(.bottom, 20)
+//            LoginView()
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import AuthenticationServices
 
 struct LoginView: View {
@@ -17,14 +18,13 @@ struct LoginView: View {
                 Button {
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: "xmark").renderingMode(.original)
                     Text("닫기").foregroundColor(.black)
-                }.padding([.leading, .top], 10)
+                }.padding([.leading, .top], 10).accentColor(.gray)
                 Spacer()
             }
             
             AppleSigninButton()
-            
             Spacer()
         }
     }
@@ -32,6 +32,8 @@ struct LoginView: View {
 
 /// 애플 로그인 버튼
 struct AppleSigninButton : View {
+    
+    let userInfo = PassthroughSubject<LoginInfoModel, Never>()
     
     var body: some View{
         SignInWithAppleButton(
@@ -50,14 +52,14 @@ struct AppleSigninButton : View {
                            // 계정 정보 가져오기
                             let userIdentifier = appleIDCredential.user
                             let fullName = appleIDCredential.fullName
-//                            let name =  (fullName?.familyName ?? "") + (fullName?.givenName ?? "")
-//                            let email = appleIDCredential.email
-//                            let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
-//                            let authorizationCode = String(data: appleIDCredential.authorizationCode!, encoding: .utf8)
+                            let name =  (fullName?.familyName ?? "") + (fullName?.givenName ?? "")
+                            let email = appleIDCredential.email
+                            let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
+                            let authorizationCode = String(data: appleIDCredential.authorizationCode!, encoding: .utf8)
+                    
+                        let model = LoginInfoModel(name: name, id: userIdentifier, email: email, idTokn: identityToken, authorizationTokn: identityToken, authorizationCd: authorizationCode)
                         
-#if DEBUG
-                        print("fullName : \(fullName) userIdentifier : \(userIdentifier)")
-                        #endif
+                        self.userInfo.send(model)
                     default:
                         break
                     }
