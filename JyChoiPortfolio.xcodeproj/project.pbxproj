@@ -22,6 +22,11 @@
 		C025DB9A2BAA78DD00B57156 /* BookMetaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB992BAA78DD00B57156 /* BookMetaInfoView.swift */; };
 		C025DB9C2BAA9F6800B57156 /* LoginInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB9B2BAA9F6800B57156 /* LoginInfoModel.swift */; };
 		C025DB9E2BAAA9FD00B57156 /* NFCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DB9D2BAAA9FD00B57156 /* NFCViewModel.swift */; };
+		C025DBA22BAABD2300B57156 /* KFImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DBA12BAABD2300B57156 /* KFImageExtension.swift */; };
+		C025DC7E2BAB128700B57156 /* SortingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DC7D2BAB128700B57156 /* SortingType.swift */; };
+		C025DC802BAB129B00B57156 /* SearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DC7F2BAB129B00B57156 /* SearchTarget.swift */; };
+		C025DC952BABA25800B57156 /* ExternalPushViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DC942BABA25800B57156 /* ExternalPushViewModel.swift */; };
+		C025DC972BABD15500B57156 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025DC962BABD15500B57156 /* Coordinator.swift */; };
 		C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */; };
 		C047F79E2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */; };
 		C0BAA0922B9E7A9D00B9E530 /* CommonConstValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */; };
@@ -103,6 +108,12 @@
 		C025DB992BAA78DD00B57156 /* BookMetaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMetaInfoView.swift; sourceTree = "<group>"; };
 		C025DB9B2BAA9F6800B57156 /* LoginInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoModel.swift; sourceTree = "<group>"; };
 		C025DB9D2BAAA9FD00B57156 /* NFCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFCViewModel.swift; sourceTree = "<group>"; };
+		C025DBA12BAABD2300B57156 /* KFImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFImageExtension.swift; sourceTree = "<group>"; };
+		C025DC7D2BAB128700B57156 /* SortingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingType.swift; sourceTree = "<group>"; };
+		C025DC7F2BAB129B00B57156 /* SearchTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTarget.swift; sourceTree = "<group>"; };
+		C025DC932BAB1E9600B57156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C025DC942BABA25800B57156 /* ExternalPushViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalPushViewModel.swift; sourceTree = "<group>"; };
+		C025DC962BABD15500B57156 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C047F79B2BA0376B0096B0D4 /* CustomWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlertViewModel.swift; sourceTree = "<group>"; };
 		C0BAA0912B9E7A9D00B9E530 /* CommonConstValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConstValue.swift; sourceTree = "<group>"; };
@@ -225,6 +236,7 @@
 		C0DAE83A2B9863E6007D194F /* JyChoiPortfolio */ = {
 			isa = PBXGroup;
 			children = (
+				C025DC932BAB1E9600B57156 /* Info.plist */,
 				C0CED0E12B9AD2950087A793 /* JyChoiPortfolio.entitlements */,
 				C0DAE83B2B9863E6007D194F /* JyChoiPortfolioApp.swift */,
 				C0DAE8792B986BA0007D194F /* Common */,
@@ -308,6 +320,7 @@
 				C0DAE8772B986AE1007D194F /* MainViewModel.swift */,
 				C0DAE8AA2B99BB7C007D194F /* DetailViewModel.swift */,
 				C047F79D2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift */,
+				C025DC942BABA25800B57156 /* ExternalPushViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -357,6 +370,7 @@
 			children = (
 				C0DAE88D2B9934D2007D194F /* ColorExtension.swift */,
 				C0DAE8932B993F64007D194F /* FontExtension.swift */,
+				C025DBA12BAABD2300B57156 /* KFImageExtension.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -376,6 +390,8 @@
 				C025DB6B2BA90ACE00B57156 /* BookModel.swift */,
 				C025DB762BA9BC1B00B57156 /* PageDataModel.swift */,
 				C025DB9B2BAA9F6800B57156 /* LoginInfoModel.swift */,
+				C025DC7D2BAB128700B57156 /* SortingType.swift */,
+				C025DC7F2BAB129B00B57156 /* SearchTarget.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -418,6 +434,7 @@
 			children = (
 				C020D3D82B9EBF84002D3E6B /* NotificationView.swift */,
 				C025DB782BA9C14300B57156 /* HorizontalTextModifier.swift */,
+				C025DC962BABD15500B57156 /* Coordinator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -570,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C025DB9E2BAAA9FD00B57156 /* NFCViewModel.swift in Sources */,
+				C025DC7E2BAB128700B57156 /* SortingType.swift in Sources */,
 				C0DAE83E2B9863E6007D194F /* ContentView.swift in Sources */,
 				C047F79C2BA0376B0096B0D4 /* CustomWKWebView.swift in Sources */,
 				C0DAE8942B993F64007D194F /* FontExtension.swift in Sources */,
@@ -579,6 +597,7 @@
 				C025DB752BA97D2600B57156 /* UIApplicationExtension.swift in Sources */,
 				C0DAE88A2B993019007D194F /* RoundTextField.swift in Sources */,
 				C025DB9A2BAA78DD00B57156 /* BookMetaInfoView.swift in Sources */,
+				C025DBA22BAABD2300B57156 /* KFImageExtension.swift in Sources */,
 				C0DAE83C2B9863E6007D194F /* JyChoiPortfolioApp.swift in Sources */,
 				C0DAE89F2B998C15007D194F /* CustomMapView.swift in Sources */,
 				C020D3DD2B9EC512002D3E6B /* DateExtension.swift in Sources */,
@@ -591,12 +610,15 @@
 				C025DB6C2BA90ACE00B57156 /* BookModel.swift in Sources */,
 				C0DAE8922B993DD4007D194F /* IntExtension.swift in Sources */,
 				C047F79E2BA03FEE0096B0D4 /* GlobalAlertViewModel.swift in Sources */,
+				C025DC952BABA25800B57156 /* ExternalPushViewModel.swift in Sources */,
 				C0CED0E02B9A9A5F0087A793 /* ToastMessageView.swift in Sources */,
 				C025DB792BA9C14300B57156 /* HorizontalTextModifier.swift in Sources */,
 				C025DB9C2BAA9F6800B57156 /* LoginInfoModel.swift in Sources */,
 				C020D3DB2B9EBFE6002D3E6B /* CommonWebView.swift in Sources */,
 				C0DAE8B82B9A126E007D194F /* ActivityView.swift in Sources */,
 				C0DAE8742B986894007D194F /* APIClient.swift in Sources */,
+				C025DC802BAB129B00B57156 /* SearchTarget.swift in Sources */,
+				C025DC972BABD15500B57156 /* Coordinator.swift in Sources */,
 				C0DAE8902B993A6D007D194F /* BookList.swift in Sources */,
 				C0DAE8782B986AE1007D194F /* MainViewModel.swift in Sources */,
 				C020D3D72B9EB971002D3E6B /* RefeatModel.swift in Sources */,
@@ -772,6 +794,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JyChoiPortfolio/Info.plist;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC 사용";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 사용하기";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -809,6 +832,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JyChoiPortfolio/Info.plist;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC 사용";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 사용하기";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

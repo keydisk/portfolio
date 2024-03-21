@@ -54,6 +54,11 @@ struct BookModel: Codable, Identifiable {
     
     let authors: [String]
     let contents, datetime, isbn: String
+    var printContents: String {
+        
+        contents.replacingOccurrences(of: "", with: "\n□")
+    }
+    
     var printDate: String {
         
         let date = Date(fromString: self.datetime, format: "yyyy-mm-dd'T'HH:mm:ss.SSSZZZZ")
@@ -71,8 +76,18 @@ struct BookModel: Codable, Identifiable {
     let price: Int
     let publisher: String
     let salePrice: Int
+    
+    /// 할인 금액이 존재하지 않을 경우 -1이 나옴
     var printPrice: String {
-        "세일가 : \(salePrice.moneyString) 정상가 : \(price.moneyString)"
+        
+        if salePrice == -1 {
+            
+            "가격 : \(price.moneyString)"
+        } else {
+            
+            "할인가 : \(salePrice.moneyString) 정상가 : \(price.moneyString)"
+        }
+        
     }
     
     let status: String

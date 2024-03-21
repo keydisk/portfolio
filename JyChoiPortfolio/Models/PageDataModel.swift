@@ -16,7 +16,7 @@ struct PageDataModel {
     /// 페이징 가능한 카운트
     let pagableCnt: Int
     /// 전체 숫자
-    let totalCnt: Int
+    var totalCnt: Int
     /// 현재 페이지
     var currentPageNo: Int = 1
     

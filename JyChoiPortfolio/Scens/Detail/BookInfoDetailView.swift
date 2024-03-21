@@ -127,7 +127,7 @@ struct BookInfoDetailView: View {
                             Text(self.printModel.printAuthor).modifier(HorizontalTextModifier(isTitle: false, align: .leading, edges: (.horizontal, 10)))
                         }
                         Spacer()
-                        KFImage(URL(string: self.printModel.thumbnail )).cornerRadius(10)
+                        KFImage(URL(string: self.printModel.thumbnail )).applyDefaultBookImg("emptyImg").cornerRadius(10)
                     }.padding(.horizontal, 10)
                     
                     self.seperatorLine
@@ -159,7 +159,7 @@ struct BookInfoDetailView: View {
                     self.seperatorLine
                     
                     Text("요약").modifier(HorizontalTextModifier(isTitle: true, align: .leading, edges: (.top, 10))).padding(.horizontal, 10)
-                    Text(self.printModel.contents).modifier(HorizontalTextModifier(isTitle: false, align: .leading, edges: (.horizontal, 10)) )
+                    Text(self.printModel.printContents).modifier(HorizontalTextModifier(isTitle: false, align: .leading, edges: (.horizontal, 10)) )
                     
                     Spacer()
                     
@@ -206,12 +206,12 @@ struct BookInfoDetailView: View {
                 
                 self.seperatorLine
                 Text(self.printModel.printPrice)
-                Text("구입").modifier(HorizontalTextModifier(isTitle: false, align: .center, textColor: .white, edges: (.horizontal, 10)) ).onTapGesture {
+                Text("구입").modifier(HorizontalTextModifier(isTitle: false, align: .center, textColor: .white, edges: (.horizontal, 10)) ).frame(height: 50).background(Color.blue).onTapGesture {
                     
-                    self.moveBuyWebView.toggle()
-                }.frame(height: 50).background(Color.blue)
+                    self.moveBuyWebView = true
+                }
                 
-                NavigationLink(destination: CommonWebView(url: self.printModel.url), isActive: self.$moveBuyWebView, label: {}).hidden()
+                NavigationLink(destination: WebView(url: self.printModel.url), isActive: self.$moveBuyWebView, label: {}).hidden()
                 
                 NavigationLink(destination: BookInfoDetailView(model: selectBook), isActive: $moveBookDetail, label: {}).hidden()
                 
@@ -235,9 +235,4 @@ struct BookInfoDetailView: View {
             })
         })
     }
-}
-
-#Preview {
-    
-    BookInfoDetailView(model: BookModel(authors: [], contents: "-", datetime: Date().toString(format: "yyyy-MM-dd"), isbn: "-", price: 0, publisher: "", salePrice: 0, status: "", thumbnail: "", title: "-", translators: [], url: ""))
 }

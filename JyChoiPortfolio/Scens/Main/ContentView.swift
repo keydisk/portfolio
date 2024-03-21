@@ -91,29 +91,24 @@ struct ContentView: View {
     @State private var isFocus: Bool = false
     @State private var showAppleLogin: Bool = false
     
+    @State var moveView = false
+    @State var pushMoveView = false
+    
     var listHeight: CGFloat = 0
     var cancelList = Set<AnyCancellable>()
     var cancel: AnyCancellable?
     @State var showSearchType = false
+    @EnvironmentObject var pushType: ExternalPushViewModel
     
     private func drawSortingOption(_ option: SortingType) -> some View {
         
-        var title = ""
-        
-        if option == .accuracy {
-            title = "정확도순"
-        } else {
-            title = "최신순"
-        }
-        
-        return Text(title).onTapGesture {
-            
+        Text(option.title).onTapGesture {
             self.viewModel.selectSorting(option)
         }.foregroundColor(self.setSortingTextColor(self.viewModel.sortingOption == option))
     }
     
     var body: some View {
-
+        
         ZStack {
             VStack(spacing: 0) {
                 
@@ -145,8 +140,6 @@ struct ContentView: View {
                     }
                 }.accessibilityLabel(ContentViewConstValue.scrollLabel)
                 
-                NavigationLink(destination: BookInfoDetailView(model: self.viewModel.selectBookModel.value), isActive: self.$viewModel.moveDetailView, label: {}).hidden()
-                
                 Spacer()
             }
             .sheet(isPresented: $showAppleLogin, content: {
@@ -168,8 +161,27 @@ struct ContentView: View {
                     
                 }
             }.padding(.trailing, 20).padding(.bottom, 20)
-//            LoginView()
+            
+            NavigationLink(destination: BookInfoDetailView(model: self.viewModel.selectBookModel.value), isActive: self.$viewModel.moveDetailView, label: {}).hidden()
         }
+        .sheet(isPresented: $pushMoveView, content: {
+            if case .moveWebPage(let url) = self.pushType.moveType {
+                
+                NavigationView(content: {
+                    WebView(url: url)
+                })
+                
+            } else if case .detailBook(let model) = self.pushType.moveType {
+                
+                NavigationView(content: {
+                    BookInfoDetailView(model: model)
+                })
+            }
+        })
+        .onReceive(self.pushType.movePushType, perform: { model in
+            
+            self.pushMoveView = true
+        })
     }
     
     /// 검색 옵션 선택

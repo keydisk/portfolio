@@ -16,12 +16,12 @@ struct CommonWebView: UIViewRepresentable {
         
         let webView = CustomWKWebView()
         webView.isUseProgressBar = true
+//        webView.title
         
         guard let url = URL(string: url) else {
             
             return webView
         }
-        
         webView.requestUrl(requestUrl: url.absoluteString)
         
         return webView
@@ -39,6 +39,29 @@ struct CommonWebView: UIViewRepresentable {
     }
 }
 
+struct WebView: View {
+    
+    let url: String
+    @Environment(\.presentationMode) var presentationMode
+    @State var title: String = ""
+    
+    var body: some View {
+        CommonWebView(url: url).navigationBarBackButtonHidden(true)
+            .navigationTitle(self.title)
+            .toolbar(content: {
+            
+            ToolbarItem(placement: .navigationBarLeading, content: {
+                Button {
+                    self.presentationMode.wrappedValue.dismiss()
+                } label:  {
+                    Image(systemName: "arrowshape.backward")
+                }.accentColor(.gray)
+                
+            })
+        })
+    }
+}
+
 #Preview {
-    CommonWebView(url: "https://www.naver.com")
+    WebView(url: "https://www.naver.com")
 }

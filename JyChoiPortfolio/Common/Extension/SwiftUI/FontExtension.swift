@@ -27,6 +27,6 @@ extension Font {
     /// 기본 디폴트 폰트
     static var defaultFont: Font {
         
-        Font.spoqaMedium(fontSize: 15)
+        Font.system(size: 15)
     }
 }

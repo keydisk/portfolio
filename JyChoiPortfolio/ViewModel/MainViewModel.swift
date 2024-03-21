@@ -10,38 +10,6 @@ import Combine
 import CoreLocation
 import SwiftyJSON
 
-/// 정렬 타입
-enum SortingType: String {
-    
-    case accuracy = "accuracy"
-    case latest = "latest"
-}
-
-enum SearchTarget: String {
-    
-    case title = "title"
-    case isbn = "isbn"
-    case publisher = "publisher"
-    case person = "person"
-    
-    /// 각각의 이넘별 타이틀
-    var printText: String {
-        switch self {
-        case .isbn:
-            return "ISBN"
-        case .title:
-            return "제목"
-        case .publisher:
-            return "출판사"
-        case .person:
-            return "인명"
-        }
-    }
-    
-    static let searchList: [RefeatModel<SearchTarget>] = [RefeatModel(id: "1", metaData: .title), RefeatModel(id: "2", metaData: .isbn), RefeatModel(id: "3", metaData: .publisher), RefeatModel(id: "4", metaData: .person)]
-    
-    static let list: [SearchTarget] = [.title, .isbn, .publisher, .person]
-}
 
 class MainViewModel: CommonViewModel {
     
@@ -53,11 +21,11 @@ class MainViewModel: CommonViewModel {
             
             if newValue == "" {
                 
+                self.pageModel.totalCnt = 0
                 self.list = []
             } else if self.searchText != newValue {
                 
                 self.searchBookListFromKeyword.send(newValue)
-                print("newValue : \(newValue)")
             }
         }
     }
@@ -87,6 +55,13 @@ class MainViewModel: CommonViewModel {
     let searchBookListFromKeyword = PassthroughSubject<String, Never>()
     var cancelationList  = Set<AnyCancellable>()
     
+    func setSearchText(_ text: String) {
+        
+        self.searchText = text
+        self.pageModel.currentPageNo = 1
+        self.requestBookList(text)
+    }
+    
     override init() {
         
         self.pageModel = PageDataModel(isEnd: true, pagableCnt: 0, totalCnt: 0)
@@ -94,21 +69,23 @@ class MainViewModel: CommonViewModel {
         
         super.init()
         
-        self.selectBookModel.sink(receiveValue: {[weak self]model in
+        /// 뷰 이동
+        self.selectBookModel.sink(receiveValue: {[weak self] model in
             
             guard model != nil else {
-                
                 return
             }
             
             self?.moveDetailView = true
-            self?.objectWillChange.send()
+            
         }).store(in: &cancelationList)
         
+        /// 디바운스 적용해서 딜레이 줌
         self.searchBookListFromKeyword.debounce(for: 0.5, scheduler: DispatchQueue.global(qos: .background)).sink(receiveValue: {[weak self] text in
             
             self?.pageModel.currentPageNo = 1
             self?.requestBookList(text)
+            
         }).store(in: &self.cancelationList)
     }
     
@@ -127,6 +104,7 @@ class MainViewModel: CommonViewModel {
         self.requestBookList(self.searchText)
     }
     
+    /// 검색 타겟을 설정
     func setSelectTarget(_ type: SearchTarget) {
         
         guard self.target != type else {
@@ -190,8 +168,6 @@ class MainViewModel: CommonViewModel {
                 }
                 
                 self?.pageModel = PageDataModel(isEnd: json["meta"]["is_end"].boolValue, pagableCnt: json["meta"]["pageable_count"].intValue, totalCnt: json["meta"]["total_count"].intValue, currentPageNo: self?.pageModel.currentPageNo ?? 1)
-                
-                self?.objectWillChange.send()
                 
             } catch let error {
                 

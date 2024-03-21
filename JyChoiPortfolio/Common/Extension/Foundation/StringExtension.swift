@@ -24,6 +24,11 @@ extension String {
         return self.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
     }
     
+    var urlDecode: String? {
+        
+        self.replacingOccurrences(of: "+", with: "%20").replacingOccurrences(of: "", with: "") .removingPercentEncoding
+    }
+    
     var numberWithInt: Int {
         
         return Int(self) ?? 0

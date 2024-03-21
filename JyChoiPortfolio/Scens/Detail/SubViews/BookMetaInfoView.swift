@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-///
+/// 책 간단 정보
 struct BookMetaInfoView: View {
     
     let model: BookModel!
@@ -18,7 +18,7 @@ struct BookMetaInfoView: View {
         
         VStack(alignment: .center) {
             
-            KFImage(URL(string: self.model.thumbnail)).onSuccess({result in
+            KFImage(URL(string: self.model.thumbnail)).applyDefaultBookImg("emptyImg").onSuccess({result in
                 
                 self.width = result.image.size.width
             }).resizable().padding(1)

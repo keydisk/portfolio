@@ -37,9 +37,7 @@ struct BookInfoCell: View {
         
         HStack(spacing: 0) {
             
-            KFImage(URL(string: model.thumbnail)).placeholder({
-                Image(systemName: "books.vertical.fill")
-            }).frame(width: 100).aspectRatio(contentMode: .fit).cornerRadius(10).clipped()
+            KFImage(URL(string: model.thumbnail)).applyDefaultBookImg("emptyImg").frame(width: 100).aspectRatio(contentMode: .fit).cornerRadius(10).clipped()
             
             VStack(spacing: 0) {
                 

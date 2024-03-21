@@ -107,18 +107,6 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
     /// 요청한 URL을 가지고 있는 프로퍼티
     public var currentUrl: URL?
     
-    /// 웹뷰 높이 조정
-    var setWebViewHeight: ((CGFloat) -> Void)?
-    
-    /// 본인인증 callBack
-    var authCallBack: (([String: Any]) -> Void)?
-    
-    /// 본인인증 취소시 callBack
-    var cancelCallBack: (() -> Void)?
-    
-    /// 스코어카드 실시간 공유하기
-    var shareCallBack: ((String) -> Void)?
-    
     public var _isUseProgressBar: Bool = false
     public var isUseProgressBar: Bool { // 프로그래스바 사용할지 않할지
         get {
@@ -138,6 +126,7 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
         }
     }
     
+    var loadingFinish: (() -> Void)?
     let networkTimeout = TimeInterval(20)
     /// 웹뷰가 속한 뷰 컨트롤러 닫기
     public var closeWebView: (() -> Void)?
@@ -461,14 +450,6 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
         
         if message.name == "observe" {
             
-        } else if message.name == "pcc" {
-            if let body = message.body as? [String: Any] {
-                self.authCallBack?(body)
-            }
-        } else if message.name == "userauthcard" {
-            if let body = message.body as? [String: Any] {
-                self.authCallBack?(body)
-            }
         }
         
         debugPrint("\(#function)")
@@ -765,7 +746,7 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
         self.webviewDelegate?.stopWebViewIndigator?()
         self.webviewDelegate?.webViewLoaded?(self)
         self.webviewDelegate?.loadingFinish?()
-        
+        self.loadingFinish?()
         if let url = self.putUrlStack() {
             
             print("url : \(url)")
@@ -778,6 +759,7 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
         
         self.progressBar?.isHidden = true
         self.webviewDelegate?.loadingFinish?()
+        self.loadingFinish?()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -799,8 +781,6 @@ class CustomWKWebView: WKWebView, WKUIDelegate, WKNavigationDelegate, WKScriptMe
             
             self.taskWithError( tmpError)
         }
-        
-        self.webviewDelegate?.loadingFinish?()
         
         self.webviewDelegate?.loadingFinish?()
     }

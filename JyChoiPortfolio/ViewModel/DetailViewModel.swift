@@ -36,13 +36,14 @@ class DetailViewModel: ObservableObject {
             return
         }
         
+        // 같은 작가와 같은 출판사를 동시에 조회해야 해서 컴바인을 merge로 묶음
         self.anyCancelation?.cancel()
         self.anyCancelation = self.api.requestBookList(text: author, target: .person, sortingOption: .latest, pageNo: 1, size: PageDataModel.pageSize).merge(with: self.api.requestBookList(text: model.publisher, target: .publisher, sortingOption: .latest, pageNo: 1, size: PageDataModel.pageSize) ).receive(on: DispatchQueue.main).sink(receiveCompletion: {complete in
             
             switch complete {
             case .finished:
                 break
-            case .failure(let error) :
+            case .failure(_) :
                 break
             }
         }, receiveValue: {[weak self] data in
@@ -68,8 +69,6 @@ class DetailViewModel: ObservableObject {
                     return model
                 })
                 
-                print("json : \(json) list : \(list.count)")
-                
                 if json[SearchAPIs.searchType].string == SearchTarget.person.rawValue {
                     
                     self?.sameAuthList     = list
@@ -77,8 +76,6 @@ class DetailViewModel: ObservableObject {
                     
                     self?.samePulisherList = list
                 }
-                
-                self?.objectWillChange.send()
                 
             } catch let error {
                 

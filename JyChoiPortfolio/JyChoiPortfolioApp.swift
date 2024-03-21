@@ -12,13 +12,20 @@ import SwiftUI
 struct JyChoiPortfolioApp: App {
     
     @ObservedObject var alertViewModel = GlobalAlertViewModel.shared
+    @StateObject var pushType = ExternalPushViewModel()
+    @State var moveView = false
     
     var body: some Scene {
         WindowGroup {
             ZStack {
+                
                 NavigationView(content: {
                     
-                    ContentView()
+                    ContentView().onOpenURL(perform: { url in
+                        
+                        self.pushType.setPushInfo(url)
+                    }).environmentObject(self.pushType)
+                    
                 }).alert(isPresented: self.$alertViewModel.showAlert, content: {
                     
                     if let cancelBtn = self.alertViewModel.cancelBtn {
