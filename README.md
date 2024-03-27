@@ -4,41 +4,39 @@
 MVVM, Swift
 
 ## 사용 프레임웍
-UIKit, SwiftUI, MapKit, WebKit, SnapKit, Combine, Alamofire, SwiftyJson
+* iOS 지원 버전 : 14.0
+* Swfit version : 5.0
+* 사용 프레임웤 :
+  - Combine, SwiftUI : swiftUI로 작성된 UI작성을 위해 사용
+  - alamofire 5.9.0 : http 통신을 위해서
+  - swiftyJson 5.0.1 : 제이슨 처리를 위해 사용
+  - kingfisher 7.11.0 : 이미지 다운로드 활용을 위해 사용.
 
 ## 구현사항
-* 공지사항 (WKWebView 랩핑해서 사용)
-* 지도보기 (Apple map 사용)
-* 화면에 표시하는 데이터는 앱 내부에 코드 레벨로 저장
-* 앱에서 사용하는 이미지는 뉴스 기사에서 발췌
-* 앱내부에서 사용하는 아이콘 이미지는 시스템 이미지 사용
-* 폰트는 spoqa 폰트 사용
-* keyboard toolbar
-* NFC 읽기 및 쓰기 구현
-* * oauth 사용 (apple login)
+* 책 검색 (키보드로 입력시 입력이 끝나고 0.5초 이후에 검색 debounce사용)
+* [카카오 책 검색 api 사용](https://dapi.kakao.com/v3/search/book)
+* 책 상세보기
+* 색 상세보기에서 책 선택시 웹뷰로 이동
 
 ## 향후 개선사항
 * 스킴으로 모든 기능을 다 연결해서 외부에서 앱의 원하는 기능으로 연결 되게 구현
 
-
-글로벌 얼럿 호출 코드
+책 검색을 위해 debounce가 적용된 코드
 <pre>
   <code>
-    GlobalAlertViewModel.shared.showAlert(message: message, confirmBtn: AlertBtnModel(title: "확인", action: {
-            completionHandler()
-        }))
+  self.searchBookListFromKeyword.debounce(for: 0.5, scheduler: DispatchQueue.global(qos: .background)).sink(receiveValue: {[weak self] text in
 
-    GlobalAlertViewModel.shared.showAlert(message: message, confirmBtn: AlertBtnModel(title: "확인", action: {
-            completionHandler(true)
-        }), cancelBtn: AlertBtnModel(title: "취소", action: {
-            completionHandler(false)
-        }))
+    self?.pageModel.currentPageNo = 1
+    self?.requestBookList(text)    
+    self?.objectWillChange.send() 
+  }).store(in: &self.cancelationList)
   </code>
 </pre>
 
-토스트 메시지 호출
+책 상세보기에서 같은 작가 & 같은 출판사의 책 조회시 두 api호출 후 두 이벤트가 모두 발생한 이후 처리를 위한 코드
 <pre>
   <code>
-    ToastMessage.shared.setMessage("메시지")
+  self.anyCancelation?.cancel()
+  self.anyCancelation = self.api.requestBookList(text: author, target: .person, sortingOption: .latest, pageNo: 1, size: PageDataModel.pageSize).merge(with: self.api.requestBookList(text: model.publisher, target: .publisher, sortingOption: .latest, pageNo: 1, size: PageDataModel.pageSize) ).receive(on: DispatchQueue.main)
   </code>
 </pre>
