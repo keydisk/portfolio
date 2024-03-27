@@ -15,10 +15,11 @@ UIKit, SwiftUI, MapKit, WebKit, SnapKit, Combine, Alamofire, SwiftyJson
 * 폰트는 spoqa 폰트 사용
 * keyboard toolbar
 * NFC 읽기 및 쓰기 구현
+* * oauth 사용 (apple login)
 
 ## 향후 개선사항
 * 스킴으로 모든 기능을 다 연결해서 외부에서 앱의 원하는 기능으로 연결 되게 구현
-* oauth 사용
+
 
 글로벌 얼럿 호출 코드
 <pre>
